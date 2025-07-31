@@ -30,6 +30,9 @@
       position: sticky;
       top: 0;
       z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     .nav-toggle {
@@ -39,15 +42,25 @@
       font-size: 24px;
       color: #d5189f;
       cursor: pointer;
+      order: 1;
+    }
+
+    .brand-name {
+      font-family: 'Dancing Script', cursive;
+      font-size: 24px;
+      color: #d5189f;
+      order: 2;
+      flex-grow: 1;
+      text-align: center;
+      margin: 0 10px;
     }
 
     nav ul {
       display: flex;
       list-style: none;
-      justify-content: center;
       gap: 15px;
       font-size: 16px;
-      flex-wrap: wrap;
+      order: 3;
     }
 
     nav ul li a {
@@ -82,7 +95,10 @@
     header::before {
       content: "";
       position: absolute;
-      inset: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       background-color: rgba(0,0,0,0.5);
       z-index: 0;
     }
@@ -92,6 +108,8 @@
       z-index: 1;
       padding: 15px;
       width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
     }
 
     .gradient-text {
@@ -157,46 +175,20 @@
 
     .product-carousel-wrapper {
       position: relative;
+      width: 100%;
+      margin: 0 auto;
       overflow: hidden;
-      max-width: 100%;
-    }
-
-    .carousel-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 35px;
-      height: 35px;
-      background-color: rgba(255, 105, 180, 0.8);
-      border: none;
-      border-radius: 50%;
-      color: white;
-      font-size: 18px;
-      cursor: pointer;
-      z-index: 10;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .carousel-btn.left {
-      left: 5px;
-    }
-
-    .carousel-btn.right {
-      right: 5px;
     }
 
     .product-grid {
       display: flex;
-      flex-wrap: nowrap;
       gap: 15px;
       overflow-x: auto;
       scroll-behavior: smooth;
       padding: 15px 0;
       -ms-overflow-style: none;
       scrollbar-width: none;
+      scroll-snap-type: x mandatory;
     }
 
     .product-grid::-webkit-scrollbar {
@@ -207,6 +199,7 @@
       flex: 0 0 auto;
       width: 85vw;
       max-width: 300px;
+      scroll-snap-align: center;
       background: #fff;
       border-radius: 8px;
       box-shadow: 0 3px 10px rgba(0,0,0,0.1);
@@ -275,6 +268,32 @@
     .product button:hover {
       background-color: #ff1493;
       transform: scale(1.05);
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 105, 180, 0.8);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .carousel-btn.left {
+      left: 10px;
+    }
+
+    .carousel-btn.right {
+      right: 10px;
     }
 
     /* FOOTER */
@@ -456,14 +475,18 @@
     @media (max-width: 500px) {
       .nav-toggle {
         display: block;
-        margin: 0 auto 15px;
       }
       
       nav ul {
-        flex-direction: column;
         display: none;
-        gap: 10px;
-        text-align: center;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        padding: 15px;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
       }
       
       nav ul.show {
@@ -492,6 +515,7 @@
 <body>
 <nav>
   <button class="nav-toggle" onclick="toggleMenu()">☰</button>
+  <div class="brand-name">Tannu's Wardrobe</div>
   <ul id="nav-menu">
     <li><a href="#">HOME</a></li>
     <li><a href="#">NEW ARRIVAL</a></li>
@@ -612,30 +636,44 @@
     menu.classList.toggle('show');
   }
 
-  // Product carousel scrolling
+  // Improved Carousel Scrolling (Centers on Arrow Click)
   function scrollProducts(direction) {
     const container = document.querySelector('.product-grid');
-    const scrollAmount = window.innerWidth * 0.8; // Scroll 80% of viewport width
+    const product = document.querySelector('.product');
+    const scrollAmount = (product.offsetWidth + 15) * direction;
+    
     container.scrollBy({
-      left: direction * scrollAmount,
+      left: scrollAmount,
       behavior: 'smooth'
     });
   }
 
-  // Observe product cards for animations
+  // Optional: Auto-center after scroll ends (for better alignment)
+  const productGrid = document.querySelector('.product-grid');
+  productGrid.addEventListener('scroll', () => {
+    const products = document.querySelectorAll('.product');
+    const containerCenter = productGrid.scrollLeft + (productGrid.offsetWidth / 2);
+    
+    products.forEach(product => {
+      const productCenter = product.offsetLeft + (product.offsetWidth / 2);
+      if (Math.abs(productCenter - containerCenter) < 50) {
+        productGrid.scrollTo({
+          left: product.offsetLeft - ((productGrid.offsetWidth - product.offsetWidth) / 2),
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  // Intersection Observer for animations
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('show');
-      } else {
-        entry.target.classList.remove('show');
       }
     });
-  }, {
-    threshold: 0.2
-  });
+  }, { threshold: 0.2 });
 
-  // Attach to all product cards
   document.querySelectorAll('.product').forEach(product => {
     observer.observe(product);
   });
