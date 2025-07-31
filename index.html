@@ -648,22 +648,7 @@
     });
   }
 
-  // Optional: Auto-center after scroll ends (for better alignment)
-  const productGrid = document.querySelector('.product-grid');
-  productGrid.addEventListener('scroll', () => {
-    const products = document.querySelectorAll('.product');
-    const containerCenter = productGrid.scrollLeft + (productGrid.offsetWidth / 2);
-    
-    products.forEach(product => {
-      const productCenter = product.offsetLeft + (product.offsetWidth / 2);
-      if (Math.abs(productCenter - containerCenter) < 50) {
-        productGrid.scrollTo({
-          left: product.offsetLeft - ((productGrid.offsetWidth - product.offsetWidth) / 2),
-          behavior: 'smooth'
-        });
-      }
-    });
-  });
+
 
   // Intersection Observer for animations
   const observer = new IntersectionObserver(entries => {
