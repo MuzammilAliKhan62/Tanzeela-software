@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tannu's Wardrobe</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai&amp;family=Bree+Serif&amp;family=DM+Sans:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css?family=Sofia&amp;effect=neon|outline|emboss|shadow-multiple" rel="stylesheet"/>
+<style>
+
+.gradient-text {
+  font-size: 64px;
+  background: linear-gradient(90deg, #ff6ec4, #7873f5, #4ade80);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glow 2s infinite alternate;
+  font-family: 'Dancing Script', cursive;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #ff6ec4, 0 0 20px #ff6ec4;
+  }
+  to {
+    text-shadow: 0 0 20px #4ade80, 0 0 30px #4ade80;
+  }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+}
+
+.quote {
+  font-size: 20px;
+  color: #fefefe;
+  max-width: 600px;
+  margin: 20px auto;
+  font-style: italic;
+}
+
+.highlight-text {
+  font-size: 36px;
+  font-weight: bold;
+  background: linear-gradient(90deg, #facc15, #f97316);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-top: 20px;
+}
+
+.highlight-subtext {
+  font-size: 24px;
+  color: #93c5fd;
+  margin-top: 10px;
+}
+
+.sofia-font {
+  font-family: 'Sofia', cursive;
+}
+
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: #fff;
+      color: #333;
+    }
+
+    /* NAVBAR */
+    nav {
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 20px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      justify-content: center;
+      gap: 40px;
+      font-size: 18px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #d5189f;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      background-color: #000;
+      color: white;
+    }
+
+    /* HERO */
+    header {
+      background: url('img11.jpg') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 0;
+    }
+
+    header h1, header h2, header h3, header p {
+      z-index: 1;
+    }
+
+    header h1 {
+      font-size: 60px;
+      font-family: 'Dancing Script', cursive;
+      margin-bottom: 10px;
+    }
+
+    header h2 {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    header h3 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    header p {
+      font-size: 18px;
+      max-width: 600px;
+    }
+
+
+    /* PRODUCTS */
+    .products {
+      padding: 60px 40px;
+      background: url('img9.jpg') no-repeat center center/cover;
+
+      color: #000;
+    }
+
+    .products h1 {
+      text-align: center;
+      font-size: 40px;
+      margin-bottom: 40px;
+      font-family: 'Bree Serif', serif;
+    }
+
+   .product-grid {
+  display: flex;
+  flex-wrap: nowrap;           /* No wrapping — horizontal scroll */
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  gap: 20px;
+  padding: 20px 0;
+  -ms-overflow-style: none;    /* IE and Edge */
+  scrollbar-width: none;       /* Firefox */
+}
+
+.product-grid::-webkit-scrollbar {
+  display: none;   
+              /* Chrome, Safari, Opera */
+}
+
+.product {
+  flex: 0 0 auto;              /* Keep fixed size */
+  width: 300px;                /* Or whatever your fixed width is */
+}
+
+
+    .product {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+    }
+
+    .product img {
+      width: 100%;
+      height: auto;
+    }
+
+    .product p {
+      font-size: 20px;
+      font-weight: bold;
+      padding: 10px 0;
+    }
+
+    .product button {
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      background-color: #ff69b4;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .product button:hover {
+      background-color: #e44cb5;
+    }
+
+    /* FOOTER */
+  
+
+    @media(max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      header h1 {
+        font-size: 40px;
+      }
+
+      header h2 {
+        font-size: 30px;
+      }
+
+      header h3 {
+        font-size: 20px;
+      }
+
+      header p {
+        font-size: 16px;
+      }
+    }
+.footer-container {
+  background: linear-gradient(to right, #111, #222);
+  color: #fff;
+  padding: 50px 30px 20px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 1200px;
+  margin: auto;
+  animation: fadeIn 1.5s ease-out;
+}
+
+.footer-brand h2 {
+  font-size: 28px;
+  color: #ff69b4;
+  margin-bottom: 10px;
+}
+
+.footer-brand p {
+  color: #ccc;
+  font-size: 15px;
+}
+
+.footer-links h4,
+.footer-contact h4 {
+  margin-bottom: 10px;
+  color: #ff69b4;
+}
+
+.footer-links a {
+  display: block;
+  color: #ccc;
+  text-decoration: none;
+  margin-bottom: 8px;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover,
+.footer-contact a:hover {
+  color: #ff69b4;
+}
+
+.footer-contact p,
+.footer-contact a {
+  color: #ccc;
+  font-size: 14px;
+  margin-bottom: 6px;
+  text-decoration: none;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  font-size: 13px;
+  color: #aaa;
+  border-top: 1px solid #444;
+  margin-top: 30px;
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media(max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .product:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+
+    .product button {
+      transition: all 0.3s ease;
+    }
+
+    .product button:hover {
+      background-color: #ff1493;
+      transform: scale(1.05);
+    }
+    
+.image-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: auto;
+  transition: filter 0.3s ease, transform 0.3s ease;
+  display: block;
+}
+
+.product:hover .image-wrapper img {
+  filter: brightness(30%) blur(1px);
+  transform: scale(1.05);
+}
+
+.product-description {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  font-size: 14px;
+  max-width: 90%;
+  text-align: center;
+  z-index: 1;
+}
+
+.product:hover .product-description {
+  opacity: 1;
+}
+
+.product-carousel-wrapper {
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: #ff69b4;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.carousel-btn.left {
+  left: 10px;
+}
+
+.carousel-btn.right {
+  right: 10px;
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 20px 0;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.product {
+  transform: scale(0.9);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.product.show {
+  transform: scale(1);
+  opacity: 1;
+}
+
+
+.product-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.product {
+  flex: 0 0 auto;
+  width: 270px;
+}
+
+@media (max-width: 768px) {
+  .product {
+    width: 80vw;
+  }
+
+  .carousel-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+  }
+
+  .gradient-text {
+    font-size: 40px;
+  }
+
+  .highlight-text {
+    font-size: 24px;
+  }
+
+  .highlight-subtext {
+    font-size: 18px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .product-description {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product {
+    width: 90vw;
+  }
+
+  .carousel-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+  }
+
+  header h1 {
+    font-size: 28px;
+  }
+
+  header h2 {
+    font-size: 20px;
+  }
+
+  header h3 {
+    font-size: 16px;
+  }
+
+  header p {
+    font-size: 14px;
+  }
+}
+</style>
+</head>
+<body>
+<nav>
+<ul>
+<li><a href="#">HOME</a></li>
+<li><a href="#">NEW ARRIVAL</a></li>
+<li><a href="#">SHOP NOW</a></li>
+<li><a href="#">CONTACT</a></li>
+<li><a href="#">PAGES</a></li>
+</ul>
+</nav>
+<header>
+<div class="hero-content">
+<h1 class="glow-text gradient-text font-effect-neon sofia-font">Tannu's Wardrobe</h1>
+<p class="quote">"Wear Confidence, Wear Class – Discover Your Signature Look"</p>
+<h2 class="highlight-text">WINTER COLLECTION</h2>
+<h3 class="highlight-subtext">Grab 30% Off New Arrivals!</h3>
+</div>
+</header>
+<section class="products">
+<h1>New Arrivals</h1>
+<div class="product-carousel-wrapper"><button class="carousel-btn left" onclick="scrollProducts(-1)">❮</button><div class="product-grid">
+<div class="product">
+<div class="image-wrapper"><img alt="Item 1" src="image1.jpg"/><div class="product-description">Classic wool jacket with inner fleece lining.</div></div>
+<p>PKR 10,000</p>
+<button>Shop Now</button>
+</div>
+<div class="product">
+<div class="image-wrapper"><img alt="Item 2" src="imag8.jpg"/><div class="product-description">Trendy long coat with premium buttons.</div></div>
+<p>PKR 10,000</p>
+<button>Shop Now</button>
+</div>
+<div class="product">
+<div class="image-wrapper"><img alt="Item 3" src="image6.avif"/><div class="product-description">Winter parka with fur-lined hood.</div></div>
+<p>PKR 10,000</p>
+<button>Shop Now</button>
+</div>
+<div class="product">
+<div class="image-wrapper"><img alt="Item 4" src="image5.jpg"/><div class="product-description">Slim-fit leather jacket for cold nights.</div></div>
+<p>PKR 10,000</p>
+<button>Shop Now</button>
+</div>
+<div class="product">
+<div class="image-wrapper"><img alt="Item 4" src="img13.jpg"/><div class="product-description">Elegant coat with wrap belt and comfort.</div></div>
+<p>PKR 10,000</p>
+<button>Shop Now</button>
+</div>
+<div class="product">
+<div class="image-wrapper"><img alt="Item 4" src="img19.jpg"/><div class="product-description">Stylish puff jacket with heat insulation.</div></div>
+<p>PKR 10,000</p>
+<button>Shop Now</button>
+</div>
+<div class="product">
+<div class="image-wrapper"><img alt="Item 4" src="img15.jpg"/><div class="product-description">Denim jacket with sherpa collar lining.</div></div>
+<p>PKR 10,000</p>
+<button>Shop Now</button>
+</div>
+<div class="product">
+<div class="image-wrapper"><img alt="Item 4" src="img17.avif"/><div class="product-description">Lightweight bomber perfect for layering.</div></div>
+<p>PKR 10,000</p>
+<button>Shop Now</button>
+</div>
+</div><button class="carousel-btn right" onclick="scrollProducts(1)">❯</button></div>
+</section>
+<footer class="footer-container">
+<div class="footer-content">
+<div class="footer-brand">
+<h2>Tannu's Wardrobe</h2>
+<p>Style that speaks for you</p>
+</div>
+<div class="footer-links">
+<h4>Quick Links</h4>
+<a href="#">Home</a>
+<a href="#">Shop</a>
+<a href="#">New Arrivals</a>
+<a href="#">Contact</a>
+</div>
+<div class="footer-contact">
+<h4>Contact Us</h4>
+<p>Email: <a href="mailto:info@tannuwordrobe.com">info@tannuwordrobe.com</a></p>
+<p>Phone: +92-300-1234567</p>
+</div>
+</div>
+<div class="footer-bottom">
+<p>© 2025 Tannu's Wardrobe. All rights reserved.</p>
+</div>
+</footer>
+<script>
+let scrollAmount = 0;
+function slideCarousel(direction) {
+  const container = document.querySelector('.product-grid');
+  const scrollStep = 300;
+  scrollAmount += direction * scrollStep;
+  container.scrollTo({
+    left: scrollAmount,
+    behavior: 'smooth'
+  });
+}
+</script><script>
+function scrollProducts(direction) {
+  const container = document.querySelector('.product-grid');
+  const scrollAmount = 300;
+  container.scrollBy({
+    left: direction * scrollAmount,
+    behavior: 'smooth'
+  });
+}
+</script>
+<script>
+function scrollProducts(direction) {
+  const container = document.querySelector('.product-grid');
+  const scrollAmount = 300;
+  container.scrollBy({
+    left: direction * scrollAmount,
+    behavior: 'smooth'
+  });
+}
+
+// Observe product cards repeatedly
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+    } else {
+      entry.target.classList.remove('show'); // Remove so it can animate again
+    }
+  });
+}, {
+  threshold: 0.4
+});
+
+// Attach to all product cards
+document.querySelectorAll('.product').forEach(product => {
+  observer.observe(product);
+});
+</script>
+</body>
+</html>
